@@ -7,4 +7,5 @@ docker-compose \
   --env-file "${SCRIPT_DIR}/.env" \
   -f "${SCRIPT_DIR}/network.yml" \
   -f "${SCRIPT_DIR}/kafka.yml" \
+  -f "${SCRIPT_DIR}/elastic.yml" \
   up -d

@@ -29,7 +29,7 @@ public class KafkaConsumerConfig<K extends Serializable, V extends SpecificRecor
     private KafkaConsumerConfigData kafkaConsumerConfigData;
 
     @Bean
-    public ConsumerFactory<K, V> consumerFactory() {
+    private Map<String, Object> consumerConfig() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaConfigData.getBootstrapServers());
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, kafkaConsumerConfigData.getKeyDeserializerClass());
@@ -44,7 +44,13 @@ public class KafkaConsumerConfig<K extends Serializable, V extends SpecificRecor
         props.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, kafkaConsumerConfigData.getMaxPartitionFetchBytesDefault()
                 * kafkaConsumerConfigData.getMaxPartitionFetchBytesBoostFactor());
         props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, kafkaConsumerConfigData.getMaxPollRecords());
-        return new DefaultKafkaConsumerFactory<>(props);
+        return props;
+    }
+
+
+    @Bean
+    public ConsumerFactory<K, V> consumerFactory() {
+        return new DefaultKafkaConsumerFactory<>(consumerConfig());
     }
 
     @Bean
