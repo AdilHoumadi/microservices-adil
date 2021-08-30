@@ -1,4 +1,4 @@
-package com.microservices.demo.common.config;
+package com.microservices.adil.common.config;
 
 import com.microservices.adil.config.RetryConfigData;
 import org.springframework.beans.factory.annotation.Autowired;
