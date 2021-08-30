@@ -1,0 +1,48 @@
+---
+version: '3.7'
+services:
+
+  config-server:
+    image: config-server:${SERVICE_VERSION}
+    hostname: config-server
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    environment:
+      - "ENCRYPT_KEY=${ENCRYPT_KEY}"
+    networks:
+      - ${NETWORK}
+
+  twitter-to-kafka:
+    image: twitter-to-kafka:${SERVICE_VERSION}
+    hostname: twitter-to-kafka
+    container_name: twitter-to-kafka
+    depends_on:
+      - config-server
+      - broker
+    ports:
+      - "8083:8080"
+    environment:
+      - "KAFKA-CONFIG_BOOTSTRAP-SERVERS=broker:29092"
+      - "KAFKA-CONFIG_SCHEMA-REGISTRY-URL=http://schema-registry:8081"
+      - "SPRING_CLOUD_CONFIG_URI=http://config-server:8888"
+      - "ENCRYPT_KEY=${ENCRYPT_KEY}"
+    networks:
+      - ${NETWORK}
+
+  kafka-to-elastic:
+    image: kafka-to-elastic:${SERVICE_VERSION}
+    hostname: kafka-to-elastic
+    container_name: kafka-to-elastic
+    depends_on:
+      - config-server
+      - broker
+    ports:
+      - "8084:8080"
+    environment:
+      - "KAFKA-CONFIG_BOOTSTRAP-SERVERS=broker:29092"
+      - "KAFKA-CONFIG_SCHEMA-REGISTRY-URL=http://schema-registry:8081"
+      - "SPRING_CLOUD_CONFIG_URI=http://config-server:8888"
+      - "ENCRYPT_KEY=${ENCRYPT_KEY}"
+    networks:
+      - ${NETWORK}

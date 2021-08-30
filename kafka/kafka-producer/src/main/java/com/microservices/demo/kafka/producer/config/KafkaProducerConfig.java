@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaProducerConfig<K extends Serializable, V extends SpecificRecordBase>{
+public class KafkaProducerConfig<K extends Serializable, V extends SpecificRecordBase> {
 
     @Autowired
     private KafkaConfigData kafkaConfigData;
@@ -30,9 +30,8 @@ public class KafkaProducerConfig<K extends Serializable, V extends SpecificRecor
 
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaConfigData.getBootstrapServers());
         props.put(kafkaConfigData.getSchemaRegistryUrlKey(), kafkaConfigData.getSchemaRegistryUrl());
-
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, kafkaProducerConfigData.getKeySerializerClass());
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, kafkaProducerConfigData.getValueSerializeClass());
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, kafkaProducerConfigData.getValueSerializerClass());
         props.put(ProducerConfig.ACKS_CONFIG, kafkaProducerConfigData.getAcks());
         props.put(ProducerConfig.BATCH_SIZE_CONFIG, kafkaProducerConfigData.getBatchSize()
                 * kafkaProducerConfigData.getBachSizeBoostFactor());

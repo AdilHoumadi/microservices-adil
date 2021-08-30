@@ -1,0 +1,28 @@
+server:
+  port: 8888
+
+logging:
+  level:
+    ROOT: INFO
+    org.spring.framework.cloud.config: DEBUG
+
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/AdilHoumadi/config-server-repository
+          default-label: master
+          username: AdilHoumadi
+          password: '{cipher}f5016e83e71dd05246ccdfe5e0b5d62446fed15cda5d3935866d485003e223fb03f6186ac5beedfdb19b79a537b4f8d84e5bc77edbdb71be992464af7e54c854'
+          clone-on-start: true
+    fail-fast: true
+    retry:
+      max-interval: 10000
+      max-attempts: 2000
+  security:
+    user:
+      name: admin
+      password: '{cipher}0b442dc79d830332a329a999acaabaa26ed6a457d7f4edbffd516e23be0006d0'

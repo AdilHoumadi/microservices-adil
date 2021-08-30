@@ -1,8 +1,9 @@
 ---
-version: '2'
+version: '3.7'
 services:
+
   zookeeper:
-    image: confluentinc/cp-zookeeper:6.2.0
+    image: confluentinc/cp-zookeeper:${KAFKA_VERSION}
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -10,9 +11,11 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - ${NETWORK}
 
   broker:
-    image: confluentinc/cp-kafka:6.2.0
+    image: confluentinc/cp-kafka:${KAFKA_VERSION}
     hostname: broker
     container_name: broker
     depends_on:
@@ -32,9 +35,11 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_JMX_PORT: 9101
       KAFKA_JMX_HOSTNAME: localhost
+    networks:
+      - ${NETWORK}
 
   schema-registry:
-    image: confluentinc/cp-schema-registry:6.2.0
+    image: confluentinc/cp-schema-registry:${KAFKA_VERSION}
     hostname: schema-registry
     container_name: schema-registry
     depends_on:
@@ -45,20 +50,20 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+    networks:
+      - ${NETWORK}
 
-  config-server:
-    image: config-server:0.0.1-SNAPSHOT
-    hostname: config-server
-    container_name: config-server
+  kowl:
+    image: quay.io/cloudhut/kowl:v1.4.0
+    hostname: kowl
+    container_name: kowl
     ports:
-      - "8888:8888"
-
-  twitter-to-kafka:
-    image: twitter-to-kafka:0.0.1-SNAPSHOT
-    hostname: twitter-to-kafka
-    container_name: twitter-to-kafka
+      - "8080:8080"
     depends_on:
-      - config-server
       - broker
-    ports:
-      - "8083:8080"
+    environment:
+      KAFKA_BROKERS: "broker:29092"
+      KAFKA_SCHEMAREGISTRY_ENABLED: "true"
+      KAFKA_SCHEMAREGISTRY_URLS: "http://schema-registry:8081"
+    networks:
+      - ${NETWORK}

@@ -9,8 +9,10 @@
         <module>kafka/kafka-model</module>
         <module>kafka/kafka-admin</module>
         <module>kafka/kafka-producer</module>
+        <module>kafka/kafka-consumer</module>
         <module>common-config</module>
         <module>config-server</module>
+        <module>kafka-to-elastic</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -77,6 +79,11 @@
                 <artifactId>kafka-producer</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.microservices.demo</groupId>
+                <artifactId>kafka-consumer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- Remote -->
             <!-- spring -->
@@ -102,7 +109,11 @@
                 <artifactId>spring-boot-starter-webflux</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.kafka</groupId>
                 <artifactId>spring-kafka</artifactId>

@@ -11,7 +11,7 @@ import java.util.List;
 @ConfigurationProperties("kafka-producer-config")
 public class KafkaProducerConfigData {
     private String keySerializerClass;
-    private String valueSerializeClass;
+    private String valueSerializerClass;
     private String compressionType;
     private String acks;
     private Integer batchSize;

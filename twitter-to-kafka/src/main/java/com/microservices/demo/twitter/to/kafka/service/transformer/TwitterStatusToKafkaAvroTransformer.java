@@ -6,13 +6,12 @@ import twitter4j.Status;
 
 @Component
 public class TwitterStatusToKafkaAvroTransformer {
-
     public TwitterAvroModel transform(Status status) {
         return TwitterAvroModel.newBuilder()
                 .setCreatedAt(status.getCreatedAt().getTime())
-                .setId(status.getUser().getId())
+                .setId(status.getId())
                 .setText(status.getText())
-                .setUserId(status.getId())
+                .setUserId(status.getUser().getId())
                 .build();
     }
 }
