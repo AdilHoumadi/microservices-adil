@@ -20,11 +20,11 @@
         <version>2.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.microservices.demo</groupId>
-    <artifactId>microservices-demo</artifactId>
+    <groupId>com.microservices.adil</groupId>
+    <artifactId>microservices-adil</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>microservices-demo</name>
-    <description>Microservices Demo project for Spring Boot</description>
+    <name>microservices-adil</name>
+    <description>Microservices project for Spring Boot</description>
     <packaging>pom</packaging>
 
     <repositories>
@@ -55,32 +55,32 @@
         <dependencies>
             <!-- LOCAL -->
             <dependency>
-                <groupId>com.microservices.demo</groupId>
+                <groupId>com.microservices.adil</groupId>
                 <artifactId>app-config-data</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.microservices.demo</groupId>
+                <groupId>com.microservices.adil</groupId>
                 <artifactId>common-config</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.microservices.demo</groupId>
+                <groupId>com.microservices.adil</groupId>
                 <artifactId>kafka-model</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.microservices.demo</groupId>
+                <groupId>com.microservices.adil</groupId>
                 <artifactId>kafka-admin</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.microservices.demo</groupId>
+                <groupId>com.microservices.adil</groupId>
                 <artifactId>kafka-producer</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.microservices.demo</groupId>
+                <groupId>com.microservices.adil</groupId>
                 <artifactId>kafka-consumer</artifactId>
                 <version>${project.version}</version>
             </dependency>

@@ -1,6 +1,6 @@
 Create your own twitter credentials under:
 
-microservices-demo/twitter-to-kafka/src/main/resources/twitter4j.properties
+microservices-adil/twitter-to-kafka/src/main/resources/twitter4j.properties
 ```
 debug=true
 oauth.consumerKey=XXX
