@@ -13,6 +13,10 @@
         <module>common-config</module>
         <module>config-server</module>
         <module>kafka-to-elastic</module>
+        <module>elastic</module>
+        <module>elastic/elastic-model</module>
+        <module>elastic/elastic-config</module>
+        <module>elastic/elastic-index-client</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -49,6 +53,8 @@
         <kafka-avro-serializer.version>6.2.0</kafka-avro-serializer.version>
         <avro.version>1.10.2</avro.version>
         <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
+
+        <elasticsearch.version>7.13.4</elasticsearch.version>
     </properties>
 
     <dependencyManagement>
@@ -82,6 +88,21 @@
             <dependency>
                 <groupId>com.microservices.adil</groupId>
                 <artifactId>kafka-consumer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microservices.adil</groupId>
+                <artifactId>elastic-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microservices.adil</groupId>
+                <artifactId>elastic-config</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microservices.adil</groupId>
+                <artifactId>elastic-index-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -124,6 +145,7 @@
                 <artifactId>spring-retry</artifactId>
                 <version>${spring-retry.version}</version>
             </dependency>
+
             <!-- Spring cloud -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -141,6 +163,23 @@
                 <version>${spring-cloud-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Elasticsearch -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch.version}</version>
             </dependency>
 
             <!-- others -->

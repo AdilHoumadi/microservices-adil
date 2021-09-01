@@ -1,9 +1,12 @@
 package com.microservices.adil.kafka.to.elastic.service.consumer.impl;
 
 import com.microservices.adil.config.KafkaConfigData;
+import com.microservices.adil.elastic.index.client.service.ElasticIndexClient;
+import com.microservices.adil.elastic.model.index.impl.TwitterIndexModel;
 import com.microservices.adil.kafka.admin.client.KafkaAdminClient;
 import com.microservices.adil.kafka.to.elastic.service.consumer.KafkaConsumer;
 import com.microservices.adil.kafka.avro.model.TwitterAvroModel;
+import com.microservices.adil.kafka.to.elastic.service.transformer.AvroToElasticModelTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,12 @@ public class TwitterKafkaConsumer implements KafkaConsumer<TwitterAvroModel> {
     @Autowired
     private KafkaConfigData kafkaConfigData;
 
+    @Autowired
+    private ElasticIndexClient<TwitterIndexModel> elasticIndexClient;
+
+    @Autowired
+    private AvroToElasticModelTransformer avroToElasticModelTransformer;
+
     @Value("${kafka-consumer-config.consumer-group-id}")
     private String consumerGroupId;
 
@@ -58,5 +67,8 @@ public class TwitterKafkaConsumer implements KafkaConsumer<TwitterAvroModel> {
                 offsets.toString(),
                 Thread.currentThread().getId()
         );
+        List<TwitterIndexModel> twitterIndexModels = avroToElasticModelTransformer.getElasticModels(messages);
+        List<String> ids = elasticIndexClient.save(twitterIndexModels);
+        LOG.info("Documents save to elasticsearch with ids: {}", ids);
     }
 }
