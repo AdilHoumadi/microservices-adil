@@ -8,4 +8,4 @@ docker-compose \
   -f "${SCRIPT_DIR}/network.yml" \
   -f "${SCRIPT_DIR}/kafka.yml" \
   -f "${SCRIPT_DIR}/elastic.yml" \
-  up -d
+  up -d --build

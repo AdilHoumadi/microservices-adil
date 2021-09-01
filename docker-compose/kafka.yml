@@ -54,7 +54,7 @@ services:
       - ${NETWORK}
 
   kowl:
-    image: quay.io/cloudhut/kowl:v1.4.0
+    build: kowl
     hostname: kowl
     container_name: kowl
     ports:
