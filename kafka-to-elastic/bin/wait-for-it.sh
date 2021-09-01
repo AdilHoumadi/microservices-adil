@@ -7,3 +7,9 @@ until curl --output /dev/null --silent --head --fail "http://config-server:8888/
   sleep 1
 done
 >&2 echo "Config-server is up"
+
+echo "Attempting to connect to elasticsearch"
+until $(nc -zv elasticsearch 9200); do
+    printf '.'
+    sleep 5
+done

@@ -13,3 +13,9 @@ URLs:
 
 - Kowl: http://0.0.0.0:8080/topics
 - Elasticsearch: http://0.0.0.0:9200/ (elastic, password)
+
+# Start
+```
+./mvnw clean package -DskipTests
+./docker-compose/start.sh
+```

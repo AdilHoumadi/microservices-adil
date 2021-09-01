@@ -41,8 +41,9 @@ services:
       - "8084:8080"
     environment:
       - "KAFKA-CONFIG_BOOTSTRAP-SERVERS=broker:29092"
-      - "KAFKA-CONFIG_SCHEMA-REGISTRY-URL=http://schema-registry:8081"
       - "SPRING_CLOUD_CONFIG_URI=http://config-server:8888"
+      - "KAFKA-CONFIG_SCHEMA-REGISTRY-URL=http://schema-registry:8081"
       - "ENCRYPT_KEY=${ENCRYPT_KEY}"
+      - "ELASTIC-CONFIG_CONNECTION-URL=http://elasticsearch:9200"
     networks:
       - ${NETWORK}
