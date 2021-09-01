@@ -8,3 +8,8 @@ oauth.consumerSecret=XXX
 oauth.accessToken=XXX
 oauth.accessTokenSecret=XXX
 ```
+
+URLs:
+
+- Kowl: http://0.0.0.0:8080/topics
+- Elasticsearch: http://0.0.0.0:9200/ (elastic, password)
